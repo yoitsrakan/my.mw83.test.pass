@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      background-color: #fafafa;
+    }
+    h1 {
+      margin: 40px 0 20px;
+      font-size: 36px;
+      text-align: center;
+    }
+    form {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #3897f0;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #2f80ed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reset Password</h1>
+    <form>
+      <input type="email" placeholder="Email" required>
+      <input type="submit" value="Send Request">
+    </form>
+  </div>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = form.elements.email.value;
+
+      const url = "https://rakan30183maksh";
+      const data = { email: email };
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Request failed.");
+        })
+        .then((data) => {
+          alert("Password reset request sent! Check your email for further instructions.");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  </script>
+</body>
+</html>
